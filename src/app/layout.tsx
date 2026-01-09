@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { GNB } from "@/features";
 
 export const metadata: Metadata = {
   title: "P.Log",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const pertendard = localFont({
-  src: "../../public/assets/fonts/PretendardVariable.woff2",
+  src: "../shared/assets/fonts/PretendardVariable.woff2",
   variable: "--font-pretendard",
   weight: "45 920",
   display: "swap",
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pertendard.variable}`}>{children}</body>
+      <body className={`${pertendard.variable}`}>
+        <GNB />
+        {children}
+      </body>
     </html>
   );
 }

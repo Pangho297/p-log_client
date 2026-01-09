@@ -45,10 +45,6 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-body {
-  font-family: var(--font-pretendard);
-}
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -56,7 +52,7 @@ body {
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.59 0.14 242);
+  --primary: oklch(0.7009 0.139 234.88);
   --primary-foreground: oklch(0.98 0.01 237);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -71,12 +67,12 @@ body {
   --chart-1: oklch(0.83 0.10 230);
   --chart-2: oklch(0.75 0.14 233);
   --chart-3: oklch(0.68 0.15 237);
-  --chart-4: oklch(0.59 0.14 242);
+  --chart-4: oklch(0.7009 0.139 234.88);
   --chart-5: oklch(0.50 0.12 243);
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.59 0.14 242);
+  --sidebar-primary: oklch(0.7009 0.139 234.88);
   --sidebar-primary-foreground: oklch(0.98 0.01 237);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
@@ -91,7 +87,7 @@ body {
 --card-foreground: oklch(0.985 0 0);
 --popover: oklch(0.205 0 0);
 --popover-foreground: oklch(0.985 0 0);
---primary: oklch(0.68 0.15 237);
+--primary: oklch(0.7009 0.139 234.88);
 --primary-foreground: oklch(0.29 0.06 243);
 --secondary: oklch(0.274 0.006 286.033);
 --secondary-foreground: oklch(0.985 0 0);
@@ -106,11 +102,11 @@ body {
 --chart-1: oklch(0.83 0.10 230);
 --chart-2: oklch(0.75 0.14 233);
 --chart-3: oklch(0.68 0.15 237);
---chart-4: oklch(0.59 0.14 242);
+--chart-4: oklch(0.7009 0.139 234.88);
 --chart-5: oklch(0.50 0.12 243);
 --sidebar: oklch(0.205 0 0);
 --sidebar-foreground: oklch(0.985 0 0);
---sidebar-primary: oklch(0.75 0.14 233);
+--sidebar-primary: oklch(0.7009 0.139 234.88);
 --sidebar-primary-foreground: oklch(0.29 0.06 243);
 --sidebar-accent: oklch(0.269 0 0);
 --sidebar-accent-foreground: oklch(0.985 0 0);
@@ -118,11 +114,17 @@ body {
 --sidebar-ring: oklch(0.556 0 0)
 }
 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+      font-family: var(--font-pretendard);
   }
+}
+
+@utility w-container {
+  max-width: 1200px;
 }
