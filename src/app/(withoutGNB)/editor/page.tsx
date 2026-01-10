@@ -1,3 +1,5 @@
+import { EditorForm } from "@/widgets/EditorForm/ui";
+
 export default function EditorPage() {
-  return <div>Editor Page!</div>;
+  return <EditorForm />;
 }

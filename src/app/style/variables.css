@@ -1,0 +1,16 @@
+@utility w-container {
+  max-width: 1200px;
+}
+
+@utility scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE / 구 Edge(Legacy) */
+  -ms-overflow-style: none;
+
+  /* Webkit (Chrome / Safari / Edge) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

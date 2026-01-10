@@ -9,9 +9,9 @@ export function ItalicIcon({ className }: SVGIconProps) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={`lucide lucide-italic-icon lucide-italic ${className}`}
     >
       <line x1="19" x2="10" y1="4" y2="4" />

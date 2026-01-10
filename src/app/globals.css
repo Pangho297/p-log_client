@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./style/typography.css";
+@import "./style/variables.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -123,8 +125,4 @@
     @apply bg-background text-foreground;
       font-family: var(--font-pretendard);
   }
-}
-
-@utility w-container {
-  max-width: 1200px;
 }

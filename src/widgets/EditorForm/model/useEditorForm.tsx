@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { EditorForm } from "./type";
 import { editorSchema } from "./schema";
-import { useRouter } from "next/router";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useResponsive } from "@/shared";
 
 export function useEditorForm() {
@@ -17,6 +16,8 @@ export function useEditorForm() {
   const { control, setValue, getValues, reset, watch, handleSubmit } =
     useForm<EditorForm>({
       defaultValues: {
+        title: "",
+        content: "",
         hashtagList: [],
       },
       resolver: zodResolver(editorSchema),
@@ -42,7 +43,7 @@ export function useEditorForm() {
     // TODO: 수정 진입 시 필드 초기화
     if (isModify) {
     }
-  }, [isModify]);
+  }, [postId]);
 
   const handleCompositionChange = (value: boolean) => {
     isComposition.current = value;

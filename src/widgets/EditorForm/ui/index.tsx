@@ -4,6 +4,7 @@ import { Controller } from "react-hook-form";
 import { useEditorForm } from "../model/useEditorForm";
 import { Button, cn, Hashtag, Input } from "@/shared";
 import { Editor } from "@/features";
+import { Preview } from "@/entities";
 
 export function EditorForm() {
   const {

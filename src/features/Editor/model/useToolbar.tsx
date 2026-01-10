@@ -43,13 +43,7 @@ export function useToolbar({ editorView }: Props) {
           }
 
           if (changes.length > 0) {
-            editorView.dispatch({
-              changes,
-              selection: EditorSelection.range(
-                range.from + number + 1,
-                range.to + number + 1
-              ),
-            });
+            editorView.dispatch({ changes });
           }
         })
         .reduce((handlers, handler, index) => {

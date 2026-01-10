@@ -9,9 +9,9 @@ export function InsertLinkIcon({ className }: SVGIconProps) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={`lucide lucide-link2-icon lucide-link-2 ${className}`}
     >
       <path d="M9 17H7A5 5 0 0 1 7 7h2" />
