@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { GNB } from "@/features";
 
 export const metadata: Metadata = {
   title: "P.Log",
@@ -22,10 +21,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pertendard.variable}`}>
-        <GNB />
-        {children}
-      </body>
+      <head>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link
+          rel="icon"
+          href="/favicon-32x32.png"
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href="/favicon-16x16.png"
+          type="image/png"
+          sizes="16x16"
+        />
+      </head>
+      <body className={`${pertendard.variable}`}>{children}</body>
     </html>
   );
 }
