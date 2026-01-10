@@ -1,4 +1,4 @@
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared";
 import { useEditor } from "../model/useEditor";
 import { Toolbar } from "./Toolbar";
 
