@@ -1,2 +1,9 @@
 export { LetterLogo } from "./LetterLogo";
 export { Logo } from "./Logo";
+export { CodeIcon } from "./Code";
+export { BoldIcon } from "./Bold";
+export { ItalicIcon } from "./Italic";
+export { QuoteIcon } from "./Quote";
+export { StrikethroughIcon } from "./Strikethrough";
+export { ImageIcon } from "./Image";
+export { InsertLinkIcon } from "./InsertLink";
