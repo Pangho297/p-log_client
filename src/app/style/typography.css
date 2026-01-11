@@ -1,18 +1,107 @@
 @utility text-h1 {
   font-size: 40px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-h1b {
+  font-size: 40px;
   font-weight: 700;
+  line-height: 140%;
 }
 
 @utility text-h2 {
   font-size: 32px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-h2b {
+  font-size: 32px;
   font-weight: 700;
+  line-height: 140%;
 }
 
 @utility text-h3 {
   font-size: 24px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-h3b {
+  font-size: 24px;
   font-weight: 700;
+  line-height: 140%;
 }
 
 @utility text-h4 {
-  font-size: 21px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-h4b {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+@utility text-b1 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-b1b {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+@utility text-b2 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-b2b {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+@utility text-b3 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-b3b {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+@utility text-b4 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-b4b {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+@utility text-example {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@utility text-caption {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 140%;
 }
