@@ -1,9 +1,10 @@
-import { RecentPostList } from "@/widgets/RecentPostList/ui";
+import { PostList, RecentPostList } from "@/widgets";
 
 export default function Home() {
   return (
-    <section>
+    <section className="flex flex-col gap-10">
       <RecentPostList />
+      <PostList />
     </section>
   );
 }

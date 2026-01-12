@@ -9,12 +9,14 @@ export { Pre } from "./ui/Pre";
 
 // Type
 export type * from "./types/common";
+export type { PostMockDto } from "./types/mock";
 
 // Utils
 export { cn } from "./utils/cn";
 
 // Constant
 export * from "./constant/route";
+export { postListMock } from "./constant/mock";
 
 // Hooks
 export { useResponsive } from "./hooks/useResponsive";

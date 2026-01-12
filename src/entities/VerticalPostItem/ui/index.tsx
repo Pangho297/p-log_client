@@ -1,20 +1,18 @@
 import Link from "next/link";
 import { format } from "date-fns";
+import { PostMockDto } from "@/shared";
 
 interface Props {
   // FIXME: Mock 데이터 타입임
-  post: {
-    postId: number;
-    title: string;
-    shortContent: string;
-    thumbnail: string;
-    createdAt: Date;
-  };
+  post: PostMockDto;
 }
 
-export function RecentPostItem({ post }: Props) {
+export function VerticalPostItem({ post }: Props) {
   return (
-    <Link href={`/${post.postId}`} className="group max-w-1/3 shrink-0">
+    <Link
+      href={`/${post.postId}`}
+      className="group max-w-1/3 shrink-0 not-lg:max-w-full"
+    >
       <div className="relative flex h-80 w-full max-w-96 flex-col-reverse overflow-hidden rounded-md border">
         {/* 썸네일 */}
         <div className="absolute top-0 left-0 h-full w-full bg-gray-200 object-cover" />
