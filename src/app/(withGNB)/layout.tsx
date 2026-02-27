@@ -6,7 +6,7 @@ export default function GNBLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex min-h-dvh flex-col justify-between">
+    <nav className="flex min-h-dvh flex-col justify-between">
       <section className="flex flex-col">
         <GNB />
         <article className="flex justify-center">
@@ -16,6 +16,6 @@ export default function GNBLayout({
       <footer className="flex justify-center border-t">
         <article className="w-container w-full">Footer</article>
       </footer>
-    </main>
+    </nav>
   );
 }

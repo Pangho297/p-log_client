@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./style/prismTheme.css";
 
+import { Toaster } from "@/shared";
+
 export const metadata: Metadata = {
   title: "P.Log",
   description: "Pangho's Development Blog",
@@ -43,7 +45,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${pertendard.variable}`}>{children}</body>
+      <body className={`${pertendard.variable}`}>
+        <main>{children}</main>
+        <Toaster />
+      </body>
     </html>
   );
 }

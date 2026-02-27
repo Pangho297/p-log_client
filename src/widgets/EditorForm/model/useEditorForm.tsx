@@ -7,6 +7,7 @@ import type { EditorForm } from "./type";
 import { editorSchema } from "./schema";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useResponsive } from "@/shared";
+import { toast } from "sonner";
 
 export function useEditorForm() {
   const [uploadImages, setUploadImages] = useState<string[]>([]);
@@ -28,7 +29,7 @@ export function useEditorForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const postId = searchParams.get("postId");
-  const isDemo = Boolean(searchParams.get("demo"));
+  const isDemo = Boolean(searchParams.get("demo") === "true");
   const isModify = Boolean(postId);
 
   const { isMobile } = useResponsive();
@@ -95,6 +96,7 @@ export function useEditorForm() {
       // TODO: 로그인 토큰도 조건문에 넣어야 함
       if (isDemo) {
         // TODO: 토스트 메시지 출력
+        toast("체험하기에서는 게시글을 작성할 수 없습니다 🥲");
         return;
       }
 
