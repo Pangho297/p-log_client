@@ -26,7 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           {...props}
         />
         {error && (
-          <p className="text-secondary text-[0.8rem] font-medium">{error}</p>
+          <p className="text-[0.8rem] font-medium text-red-500">{error}</p>
         )}
       </>
     );
