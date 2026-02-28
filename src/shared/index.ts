@@ -7,6 +7,7 @@ export * from "./ui/Sonner";
 export { Hashtag } from "./ui/Hashtag";
 export { Code } from "./ui/Code";
 export { Pre } from "./ui/Pre";
+export { Loading } from "./ui/Loading";
 
 // Type
 export type * from "./types/common";

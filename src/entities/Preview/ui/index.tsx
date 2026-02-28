@@ -1,3 +1,5 @@
+"use client";
+
 import "../model/atom-light.css";
 
 import { useProcessor } from "@/shared";

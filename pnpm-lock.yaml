@@ -56,6 +56,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.4
         version: 1.2.4(@types/react@19.2.7)(react@19.2.3)
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -65,12 +68,18 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       hast-util-is-element:
         specifier: ^3.0.0
         version: 3.0.0
       lucide-react:
         specifier: ^0.562.0
         version: 0.562.0(react@19.2.3)
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
       next:
         specifier: 16.1.1
         version: 16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -2181,6 +2190,9 @@ packages:
 
   get-tsconfig@4.13.0:
     resolution: {integrity: sha512-1VKTZJCwBrvbd+Wn3AOgQP/2Av+TfTCOlE4AcRJE72W1ksZXbAx8PPBR9RzgTeSPzlPMHrbANMH3LbltH73wxQ==}
+
+  github-slugger@2.0.0:
+    resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -5961,6 +5973,8 @@ snapshots:
   get-tsconfig@4.13.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
+
+  github-slugger@2.0.0: {}
 
   glob-parent@5.1.2:
     dependencies:

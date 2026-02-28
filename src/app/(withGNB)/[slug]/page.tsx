@@ -1,3 +1,6 @@
+import { Post } from "@/widgets";
+
 export default function PostPage() {
-  return <div>Post Page!</div>;
+  // FIXME: 게시글 정보 내려줘야 함
+  return <Post post={{}} />;
 }
