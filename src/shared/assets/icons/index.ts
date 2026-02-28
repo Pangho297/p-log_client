@@ -7,3 +7,8 @@ export { QuoteIcon } from "./Quote";
 export { StrikethroughIcon } from "./Strikethrough";
 export { ImageIcon } from "./Image";
 export { InsertLinkIcon } from "./InsertLink";
+export { GithubIcon } from "./GithubIcon";
+export { NextjsIcon } from "./NextjsIcon";
+export { NestjsIcon } from "./NestjsIcon";
+export { ShadcnIcon } from "./ShadcnIcon";
+export { DrizzleIcon } from "./DrizzleIcon";

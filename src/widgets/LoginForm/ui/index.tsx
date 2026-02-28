@@ -1,11 +1,13 @@
 "use client";
 
+import { Controller } from "react-hook-form";
+
 import { Button, Input } from "@/shared";
 import { useLoginForm } from "../model/useLoginForm";
-import { Controller } from "react-hook-form";
 
 export function LoginForm() {
   const { control, errors, onSubmit } = useLoginForm();
+
   return (
     <form
       className="flex w-full items-center justify-center p-4"

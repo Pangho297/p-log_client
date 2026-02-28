@@ -1,4 +1,5 @@
 import { GNB } from "@/features";
+import { Footer } from "@/widgets";
 
 export default function GNBLayout({
   children,
@@ -13,9 +14,7 @@ export default function GNBLayout({
           <article className="w-container my-8 w-full">{children}</article>
         </article>
       </section>
-      <footer className="flex justify-center border-t">
-        <article className="w-container w-full">Footer</article>
-      </footer>
+      <Footer />
     </nav>
   );
 }
