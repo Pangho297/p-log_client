@@ -6,7 +6,7 @@ import { Button, Input } from "@/shared";
 import { useLoginForm } from "../model/useLoginForm";
 
 export function LoginForm() {
-  const { control, errors, onSubmit } = useLoginForm();
+  const { control, errors, isSubmitting, onSubmit } = useLoginForm();
 
   return (
     <form
@@ -44,7 +44,9 @@ export function LoginForm() {
             />
           )}
         />
-        <Button type="submit">로그인</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          로그인
+        </Button>
       </div>
     </form>
   );
