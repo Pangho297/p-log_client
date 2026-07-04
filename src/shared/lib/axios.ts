@@ -4,7 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-import { ROUTE } from "@/shared/constant/route";
+import { redirectToLogin } from "@/shared/lib/auth";
 
 const AUTH_REFRESH_URL = "/auth/refresh";
 const AUTH_EXCLUDED_URLS = ["/auth/login", AUTH_REFRESH_URL, "/auth/logout"];
@@ -56,10 +56,7 @@ function refreshAuthToken() {
 
 function handleUnauthorized() {
   unauthorizedHandler?.();
-
-  if (typeof window !== "undefined") {
-    window.location.replace(ROUTE.LOGIN);
-  }
+  redirectToLogin();
 }
 
 async function errorInterceptor(error: AxiosError) {
@@ -85,7 +82,6 @@ async function errorInterceptor(error: AxiosError) {
   }
 }
 
-// TODO 전역 Store 초기화 연결
 export function setUnauthorizedHandler(handler: UnauthorizedHandler | null) {
   unauthorizedHandler = handler;
 }

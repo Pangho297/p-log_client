@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./style/prismTheme.css";
 
+import { Providers } from "./providers";
 import { Toaster } from "@/shared";
 
 export const metadata: Metadata = {
@@ -46,7 +47,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${pertendard.variable}`}>
-        <main>{children}</main>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
         <Toaster />
       </body>
     </html>

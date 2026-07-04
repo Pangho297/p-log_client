@@ -3,14 +3,14 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { login } from "@/shared/api";
-import { ROUTE } from "@/shared/constant/route";
+import { getSafeRedirectPath, useLogin } from "@/shared";
 
 import { loginSchema } from "./schema";
 import { LoginForm } from "./types";
 
 export function useLoginForm() {
   const router = useRouter();
+  const { mutateAsync: login } = useLogin();
   const {
     control,
     handleSubmit,
@@ -27,7 +27,12 @@ export function useLoginForm() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await login(data);
-      router.replace(ROUTE.HOME);
+      const redirectPath =
+        typeof window === "undefined"
+          ? null
+          : new URLSearchParams(window.location.search).get("redirect");
+
+      router.replace(getSafeRedirectPath(redirectPath));
     } catch {
       toast.error("로그인에 실패했습니다.");
     }
