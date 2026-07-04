@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { type ReactNode, useEffect, useState } from "react";
 
-import { setUnauthorizedHandler } from "@/shared";
+import { setUnauthorizedHandler, useOwnerStore } from "@/shared";
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
@@ -15,6 +15,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     setUnauthorizedHandler(() => {
       queryClient.clear();
+      useOwnerStore.getState().setIsOwner(false);
     });
 
     return () => {
@@ -26,7 +27,19 @@ function AuthProvider({ children }: { children: ReactNode }) {
 }
 
 export function Providers({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+            retry: false,
+            networkMode: "offlineFirst",
+          },
+        },
+      })
+  );
 
   return (
     <QueryClientProvider client={queryClient}>

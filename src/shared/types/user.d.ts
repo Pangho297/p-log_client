@@ -13,3 +13,11 @@ export interface SignupResponseDto {
   /** 사용자 Email */
   email: string;
 }
+
+export interface UserDto {
+  /** 사용자 Id (PK) */
+  id: string;
+
+  /** 사용자 이메일 주소 */
+  email: string;
+}
