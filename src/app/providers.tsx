@@ -7,21 +7,41 @@ import {
 } from "@tanstack/react-query";
 import { type ReactNode, useEffect, useState } from "react";
 
-import { setUnauthorizedHandler, useOwnerStore } from "@/shared";
+import { OWNER_USER_ID, setUnauthorizedHandler, useOwnerStore } from "@/shared";
+import { useUserSelf } from "@/shared/api/user/query";
 
 function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
+  const setIsOwner = useOwnerStore((state) => state.setIsOwner);
+  const { data: self, isError } = useUserSelf();
 
-  useEffect(() => {
-    setUnauthorizedHandler(() => {
-      queryClient.clear();
-      useOwnerStore.getState().setIsOwner(false);
-    });
+  useEffect(
+    function unauthorized() {
+      setUnauthorizedHandler(() => {
+        queryClient.clear();
+        useOwnerStore.getState().setIsOwner(false);
+      });
 
-    return () => {
-      setUnauthorizedHandler(null);
-    };
-  }, [queryClient]);
+      return () => {
+        setUnauthorizedHandler(null);
+      };
+    },
+    [queryClient]
+  );
+
+  useEffect(
+    function detectOwner() {
+      if (self) {
+        setIsOwner(self.id === OWNER_USER_ID);
+        return;
+      }
+
+      if (isError) {
+        setIsOwner(false);
+      }
+    },
+    [self, isError, setIsOwner]
+  );
 
   return children;
 }

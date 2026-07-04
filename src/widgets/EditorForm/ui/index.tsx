@@ -9,6 +9,8 @@ import { Preview } from "@/entities";
 export function EditorForm() {
   const {
     control,
+    errors,
+    isSubmitting,
     watch,
     hashtag,
     isHashtagInputFocused,
@@ -98,7 +100,9 @@ export function EditorForm() {
             {/* <Button variant="outline" type="button">
               임시저장
             </Button> */}
-            <Button type="submit">게시하기</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              게시하기
+            </Button>
           </div>
         </div>
       </article>

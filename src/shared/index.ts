@@ -22,6 +22,7 @@ export { cn } from "./utils/cn";
 // lib
 export { setUnauthorizedHandler } from "./lib/axios";
 export { getSafeRedirectPath } from "./lib/auth";
+export * from "./lib/getErrorMessage";
 
 // Constant
 export * from "./constant/common";

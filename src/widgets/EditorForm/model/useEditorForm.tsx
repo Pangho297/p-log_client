@@ -6,39 +6,48 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { EditorForm } from "./type";
 import { editorSchema } from "./schema";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useResponsive } from "@/shared";
+import {
+  Button,
+  getErrorMessage,
+  ROUTE,
+  useOwnerStore,
+  useResponsive,
+} from "@/shared";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export function useEditorForm() {
   const [uploadImages, setUploadImages] = useState<string[]>([]);
   const [hashtag, setHashtag] = useState("");
   const [isHashtagInputFocused, setIsHashtagInputFocused] = useState(false);
 
-  const { control, setValue, getValues, reset, watch, handleSubmit } =
-    useForm<EditorForm>({
-      defaultValues: {
-        title: "",
-        content: "",
-        hashtagList: [],
-      },
-      resolver: zodResolver(editorSchema),
-    });
+  const {
+    control,
+    setValue,
+    getValues,
+    reset,
+    watch,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<EditorForm>({
+    defaultValues: {
+      title: "",
+      content: "",
+      hashtagList: [],
+    },
+    mode: "onSubmit",
+    resolver: zodResolver(editorSchema),
+  });
 
   const isComposition = useRef(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
   const postId = searchParams.get("postId");
-  const isDemo = Boolean(searchParams.get("demo") === "true");
   const isModify = Boolean(postId);
 
   const { isMobile } = useResponsive();
-
-  useEffect(() => {
-    if (!isDemo) {
-      // TODO: 비로그인, 데모 모드 아닐 시 로그인 화면으로 이동
-    }
-  }, [isDemo]);
+  const { isOwner } = useOwnerStore();
 
   useEffect(() => {
     // TODO: 수정 진입 시 필드 초기화
@@ -93,10 +102,19 @@ export function useEditorForm() {
 
   const onSubmit = handleSubmit(
     (data) => {
-      // TODO: 로그인 토큰도 조건문에 넣어야 함
-      if (isDemo) {
-        // TODO: 토스트 메시지 출력
-        toast("체험하기에서는 게시글을 작성할 수 없습니다 🥲");
+      if (!isOwner) {
+        toast(
+          <div className="flex items-center justify-between gap-5">
+            <p className="w-full text-xs">
+              비회원은 게시글을 작성할 수 없습니다 🥲
+            </p>
+            <Link href={ROUTE.LOGIN}>
+              <Button className="h-7">
+                <p className="text-xs">로그인</p>
+              </Button>
+            </Link>
+          </div>
+        );
         return;
       }
 
@@ -124,13 +142,19 @@ export function useEditorForm() {
 
       // TODO: 작성 API 요청
     },
-    (error) => {
-      // TODO: 에러 발생 토스트 메시지 출력
+    (errors) => {
+      const message = getErrorMessage(errors);
+
+      if (message) {
+        toast.error(message);
+      }
     }
   );
 
   return {
     control,
+    errors,
+    isSubmitting,
     watch,
     hashtag,
     isHashtagInputFocused,
