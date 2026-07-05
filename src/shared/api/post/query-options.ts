@@ -30,7 +30,7 @@ export const postQueries = {
         }),
     }),
 
-  detail: (slug: string) =>
+  detail: ({ slug, enabled = true }: { slug: string; enabled?: boolean }) =>
     queryOptions({
       queryKey: QUERY_KEY.post.getPost(slug),
       queryFn: async () => {
@@ -42,5 +42,6 @@ export const postQueries = {
 
         return post;
       },
+      enabled,
     }),
 };

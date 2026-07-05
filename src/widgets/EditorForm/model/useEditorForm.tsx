@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { EditorForm } from "./type";
@@ -10,17 +10,19 @@ import {
   getErrorMessage,
   LoginToast,
   useCreatePost,
+  useGetPost,
   useOwnerStore,
   useResponsive,
+  useUpdatePost,
 } from "@/shared";
 import { toast } from "sonner";
 
 export function useEditorForm() {
-  const [uploadImages, setUploadImages] = useState<string[]>([]);
   const [hashtag, setHashtag] = useState("");
   const [isHashtagInputFocused, setIsHashtagInputFocused] = useState(false);
 
   const { mutate: createPost } = useCreatePost();
+  const { mutate: updatePost } = useUpdatePost();
 
   const {
     control,
@@ -44,17 +46,26 @@ export function useEditorForm() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const postId = searchParams.get("postId");
-  const isModify = Boolean(postId);
+  const slug = searchParams.get("slug");
+  const isModify = useMemo(() => Boolean(slug), [slug]);
 
   const { isMobile } = useResponsive();
   const { isOwner } = useOwnerStore();
 
+  const { data: post } = useGetPost({
+    slug: slug || "",
+    enabled: Boolean(slug),
+  });
+
   useEffect(() => {
-    // TODO: 수정 진입 시 필드 초기화
-    if (isModify) {
+    if (isModify && post) {
+      reset({
+        title: post.title,
+        tags: post.tags,
+        content: post.content,
+      });
     }
-  }, [postId]);
+  }, [post, isModify]);
 
   const handleCompositionChange = (value: boolean) => {
     isComposition.current = value;
@@ -108,8 +119,11 @@ export function useEditorForm() {
         return;
       }
 
-      if (isModify && postId) {
-        // TODO: 수정 API 요청
+      if (isModify && slug) {
+        updatePost({
+          slug,
+          ...data,
+        });
         return;
       }
 

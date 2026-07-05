@@ -40,7 +40,7 @@ export function Post({ post }: Props) {
                 </div>
               </div>
               {/* 수정, 삭제 (작성자 본인만 표시) */}
-              <PostOwnerActions postId={post.id} />
+              <PostOwnerActions slug={post.slug} />
             </div>
             <div className="relative flex">
               <Preview doc={post.content} />

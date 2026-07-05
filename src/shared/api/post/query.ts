@@ -11,6 +11,6 @@ export function useGetRecentPostList(params?: GetPostListRequestDto) {
   return useQuery(postQueries.recentList(params));
 }
 
-export function useGetPost(slug: string) {
-  return useQuery(postQueries.detail(slug));
+export function useGetPost(params: {slug: string, enabled?: boolean}) {
+  return useQuery(postQueries.detail(params));
 }

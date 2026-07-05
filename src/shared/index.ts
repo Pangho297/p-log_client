@@ -2,6 +2,7 @@
 export * from "./ui/Button";
 export * from "./ui/Input";
 export * from "./ui/Sonner";
+export * from "./ui/AlertDialog";
 
 // Custom UI
 export { Hashtag } from "./ui/Hashtag";
