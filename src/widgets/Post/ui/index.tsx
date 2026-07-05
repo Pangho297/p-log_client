@@ -1,12 +1,12 @@
 import { Preview, TOC } from "@/entities";
 import { PostOwnerActions } from "@/features";
-import { Hashtag, Loading } from "@/shared";
+import { Hashtag, Loading, PostDto } from "@/shared";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 interface Props {
-  post: any; // FIXME: 게시글 정보 내려받아야 함
+  post: PostDto;
 }
 
 export function Post({ post }: Props) {
@@ -26,7 +26,7 @@ export function Post({ post }: Props) {
             <div className="flex items-center gap-2">
               {/* 작성일 */}
               <p className="text-gray-400">
-                {format(new Date(), "yyyy년 MM월 dd일")}
+                {format(post.createdAt, "yyyy년 MM월 dd일")}
               </p>
             </div>
             {/* 해시태그 */}
@@ -34,7 +34,7 @@ export function Post({ post }: Props) {
               <div className="scrollbar-hide flex-1 overflow-auto">
                 <div className="flex flex-nowrap gap-x-4 gap-y-2">
                   {/* @ts-ignore */}
-                  {post.hashtagList?.map((hashtag, index) => (
+                  {post.tags?.map((hashtag, index) => (
                     <Hashtag key={`${hashtag}_${index}`} hashtag={hashtag} />
                   ))}
                 </div>

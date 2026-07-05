@@ -6,7 +6,7 @@ import axios, {
 
 import { redirectToLogin } from "@/shared/lib/auth";
 import { toast } from "sonner";
-import { getErrorMessage } from "./getErrorMessage";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 const AUTH_REFRESH_URL = "/auth/refresh";
 const AUTH_EXCLUDED_URLS = ["/auth/login", AUTH_REFRESH_URL, "/auth/logout"];

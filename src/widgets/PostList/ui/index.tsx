@@ -1,15 +1,15 @@
 "use client";
 
 import { HorizontalPostItem, VerticalPostItem } from "@/entities";
-import { useGetPostList, useResponsive, postListFormatter } from "@/shared";
+import { useGetPostList, useResponsive, postFormatter } from "@/shared";
 import { useMemo } from "react";
 
 export function PostList() {
   const { isMobile } = useResponsive();
   const { data: postList } = useGetPostList();
+
   const items = useMemo(
-    () =>
-      postListFormatter(postList?.pages.flatMap((post) => post.items) || []),
+    () => postFormatter(postList?.pages.flatMap((post) => post.items) || []),
     [postList]
   );
 

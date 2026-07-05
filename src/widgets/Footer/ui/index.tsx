@@ -3,7 +3,7 @@ import { ICON } from "@/shared";
 
 export function Footer() {
   return (
-    <footer className="flex justify-center border-t">
+    <footer className="flex justify-center border-t px-5">
       <section className="w-container flex w-full gap-40 py-5">
         <article className="flex flex-col gap-2">
           <h3 className="text-ring text-lg font-bold">Developer</h3>

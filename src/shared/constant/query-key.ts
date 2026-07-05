@@ -15,10 +15,11 @@ export const QUERY_KEY = {
       "getPostList",
       params,
     ],
-    getResentPostList: (params?: GetPostListRequestDto) => [
+    getRecentPostList: (params?: GetPostListRequestDto) => [
       ROOT_KEY.post,
       "getRecentPostList",
       params,
     ],
+    getPost: (slug: string) => [ROOT_KEY, "getPost", slug],
   },
 };

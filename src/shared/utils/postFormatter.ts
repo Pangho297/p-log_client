@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { DEFAULT_THUMBNAIL, THUMBNAIL_MAP } from "../constant/common";
 
-export function postListFormatter(postList: PostDto[]): PostItemDto[] {
+export function postFormatter(postList: PostDto[]): PostItemDto[] {
   const markdownToPlainText = (markdown: string) => {
     const tree = unified()
       .use(remarkParse)

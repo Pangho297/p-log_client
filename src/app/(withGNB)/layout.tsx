@@ -10,8 +10,8 @@ export default function GNBLayout({
     <nav className="flex min-h-dvh flex-col justify-between">
       <section className="flex flex-col">
         <GNB />
-        <article className="flex justify-center">
-          <article className="w-container my-8 w-full">{children}</article>
+        <article className="mt-16 flex justify-center">
+          <article className="w-container w-full">{children}</article>
         </article>
       </section>
       <Footer />
