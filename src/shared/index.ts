@@ -12,7 +12,10 @@ export { LoginToast } from "./ui/LoginToast";
 
 // Type
 export type * from "./types/common";
-export type { PostMockDto } from "./types/mock";
+export type * from "./types/auth";
+export type * from "./types/user";
+export type * from "./types/post";
+export type * from "./types/image";
 
 // Api
 export * from "./api";
@@ -24,6 +27,7 @@ export { cn } from "./utils/cn";
 export { setUnauthorizedHandler } from "./lib/axios";
 export { getSafeRedirectPath } from "./lib/auth";
 export * from "./lib/getErrorMessage";
+export * from "./lib/postListFormatter";
 
 // Constant
 export * from "./constant/common";

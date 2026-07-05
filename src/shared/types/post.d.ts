@@ -16,6 +16,9 @@ export interface PostDto {
   /** 게시글 내용 */
   content: string;
 
+  /** 게시글 썸네일 */
+  thumbnail: string;
+
   /** 식별 태그 목록 */
   tags: string[];
 
@@ -27,6 +30,23 @@ export interface PostDto {
 
   /** 게시글 삭제일 */
   deletedAt: string;
+}
+
+export interface PostItemDto {
+  /** 게시글 URL 식별자 */
+  slug: string;
+
+  /** 게시글 제목 */
+  title: string;
+
+  /** 게시글 요약 */
+  shortContent: string;
+
+  /** 썸네일 이미지 URL */
+  thumbnail: string;
+
+  /** 게시글 작성일 */
+  createdAt: string;
 }
 
 export interface CreatePostRequestDto {

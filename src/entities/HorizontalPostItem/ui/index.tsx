@@ -1,17 +1,25 @@
-import { PostMockDto } from "@/shared";
+import { PostItemDto } from "@/shared";
 import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  post: PostMockDto;
+  post: PostItemDto;
 }
 
 export function HorizontalPostItem({ post }: Props) {
   return (
-    <Link href={`/${post.postId}`} className="group">
+    <Link href={`/${post.slug}`} className="group">
       <div className="flex h-40 w-full overflow-hidden rounded-md border">
         {/* 썸네일 */}
-        <div className="h-full w-full max-w-96 shrink-0 bg-gray-200 object-cover" />
+        <div className="relative h-full w-96 shrink-0">
+          <Image
+            src={post.thumbnail}
+            alt="post_thumbnail"
+            fill
+            className="object-cover"
+          />
+        </div>
         <div className="w-full max-w-203.5 bg-white p-5">
           <div className="flex flex-col gap-1">
             <p className="text-example text-gray-400">

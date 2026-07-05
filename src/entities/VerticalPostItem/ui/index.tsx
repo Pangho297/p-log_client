@@ -1,22 +1,29 @@
 import Link from "next/link";
 import { format } from "date-fns";
-import { PostMockDto } from "@/shared";
+import { PostItemDto } from "@/shared";
+import Image from "next/image";
 
 interface Props {
-  // FIXME: Mock 데이터 타입임
-  post: PostMockDto;
+  post: PostItemDto;
 }
 
 export function VerticalPostItem({ post }: Props) {
   return (
     <Link
-      href={`/${post.postId}`}
+      href={`/${post.slug}`}
       className="group max-w-1/3 shrink-0 not-lg:max-w-full"
     >
-      <div className="relative flex h-80 w-full max-w-96 flex-col-reverse overflow-hidden rounded-md border">
+      <div className="relative flex h-80 w-full flex-col-reverse overflow-hidden rounded-md border lg:w-96">
         {/* 썸네일 */}
-        <div className="absolute top-0 left-0 h-full w-full bg-gray-200 object-cover" />
-        <div className="z-10 w-full border-t bg-white p-5">
+        <div className="absolute z-0 h-full w-full shrink-0">
+          <Image
+            src={post.thumbnail}
+            alt="post_thumbnail"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="z-10 min-h-35.75 w-full border-t bg-white p-5">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-1">
               <p className="text-example text-gray-400">
