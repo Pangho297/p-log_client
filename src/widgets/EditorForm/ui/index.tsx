@@ -42,11 +42,11 @@ export function EditorForm() {
         <div
           className={cn(
             "sticky top-21.25 z-10 flex min-h-14 items-center gap-2 bg-white not-xl:top-12 not-xl:min-h-10",
-            watch("hashtagList").length > 0 && "pl-5 not-xl:pl-3"
+            watch("tags").length > 0 && "pl-5 not-xl:pl-3"
           )}
         >
           <ul className="flex gap-2">
-            {watch("hashtagList").map((hashtag, index) => (
+            {watch("tags").map((hashtag, index) => (
               <li key={index}>
                 <Hashtag
                   hashtag={hashtag}
@@ -55,7 +55,7 @@ export function EditorForm() {
               </li>
             ))}
           </ul>
-          {watch("hashtagList").length < 15 && (
+          {watch("tags").length < 15 && (
             <Input
               variant="borderless"
               value={hashtag}
@@ -68,7 +68,7 @@ export function EditorForm() {
               placeholder="태그를 입력하세요"
               className={cn(
                 "flex-1 text-lg not-xl:text-sm placeholder:text-gray-500 placeholder:opacity-50",
-                watch("hashtagList").length === 0
+                watch("tags").length === 0
                   ? "px-5 not-xl:px-3"
                   : "px-2 not-xl:px-1"
               )}

@@ -5,6 +5,8 @@ import axios, {
 } from "axios";
 
 import { redirectToLogin } from "@/shared/lib/auth";
+import { toast } from "sonner";
+import { getErrorMessage } from "./getErrorMessage";
 
 const AUTH_REFRESH_URL = "/auth/refresh";
 const AUTH_EXCLUDED_URLS = ["/auth/login", AUTH_REFRESH_URL, "/auth/logout"];
@@ -68,6 +70,9 @@ async function errorInterceptor(error: AxiosError) {
     originalRequest._retry ||
     isAuthExcludedUrl(originalRequest.url)
   ) {
+    const message = getErrorMessage(error);
+    toast.error(message);
+
     return Promise.reject(error);
   }
 
@@ -77,6 +82,7 @@ async function errorInterceptor(error: AxiosError) {
     await refreshAuthToken();
     return axiosInstance(originalRequest);
   } catch (refreshError) {
+    toast.error("회원 정보를 조회할 수 없습니다. 다시 로그인 해주세요");
     handleUnauthorized();
     return Promise.reject(refreshError);
   }

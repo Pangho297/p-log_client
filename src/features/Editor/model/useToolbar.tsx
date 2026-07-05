@@ -2,16 +2,87 @@
 
 import { EditorSelection } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
+import { LoginToast, useGetDirectUploadUrl, useOwnerStore } from "@/shared";
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface Props {
   editorView: EditorView | undefined;
 }
 
+async function selectImageFile() {
+  return new Promise<File | null>((resolve) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    input.onchange = () => {
+      resolve(input.files?.[0] ?? null);
+      input.remove();
+    };
+
+    input.oncancel = () => {
+      resolve(null);
+      input.remove();
+    };
+
+    input.click();
+  });
+}
+
+/** 내부 Axios Instance 사용 시 CORS 에러 발생 가능하므로 fetch로 분리하여 사용 */
+async function uploadImageToCloudflare(uploadURL: string, file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(uploadURL, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("이미지 업로드에 실패했습니다.");
+  }
+}
+
+function getImageAltText(selectedText: string, file: File) {
+  const altText = selectedText || file.name.replace(/\.[^.]+$/, "") || "image";
+
+  return altText.replace(/[\[\]\n\r]/g, " ").trim() || "image";
+}
+
+function replacePlaceholder(
+  editorView: EditorView,
+  placeholder: string,
+  insert: string
+) {
+  const doc = editorView.state.doc.toString();
+  const from = doc.indexOf(placeholder);
+
+  if (from === -1) return false;
+
+  editorView.dispatch({
+    changes: {
+      from,
+      to: from + placeholder.length,
+      insert,
+    },
+    selection: EditorSelection.cursor(from + insert.length),
+  });
+
+  return true;
+}
+
 export function useToolbar({ editorView }: Props) {
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const { mutateAsync: getDirectUploadUrl } = useGetDirectUploadUrl();
+
+  const { isOwner } = useOwnerStore();
+
   const handleItemClick = (mode: string) => {
     if (!editorView) return;
 
-    const handler: { [key: string]: () => void } = {
+    const handler: { [key: string]: () => void | Promise<void> } = {
       ...[1, 2, 3, 4]
         .map((number) => () => {
           // 선택 안하고 사용한 경우 쓰이는 범위 값;
@@ -264,8 +335,59 @@ export function useToolbar({ editorView }: Props) {
         });
         return;
       },
-      image: () => {
-        // TODO: 이미지 업로드 구현해야 함
+      image: async () => {
+        if (isUploadingImage) return;
+
+        if (!isOwner) {
+          toast(<LoginToast />);
+          return;
+        }
+
+        const range = editorView.state.selection.main;
+        const selectedText = editorView.state.doc
+          .sliceString(range.from, range.to)
+          .trim();
+
+        const file = await selectImageFile();
+
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          toast.error("이미지 파일만 업로드할 수 있습니다.");
+          return;
+        }
+
+        const placeholder = `![이미지 업로드 중...](uploading-${crypto.randomUUID()})`;
+
+        editorView.dispatch({
+          changes: {
+            from: range.from,
+            to: range.to,
+            insert: placeholder,
+          },
+          selection: EditorSelection.cursor(range.from + placeholder.length),
+        });
+
+        try {
+          setIsUploadingImage(true);
+
+          const { uploadURL, deliveryURL } = await getDirectUploadUrl({
+            purpose: "post-content",
+          });
+
+          await uploadImageToCloudflare(uploadURL, file);
+
+          const altText = getImageAltText(selectedText, file);
+          const markdown = `![${altText}](${deliveryURL})`;
+
+          replacePlaceholder(editorView, placeholder, markdown);
+        } catch {
+          replacePlaceholder(editorView, placeholder, selectedText);
+          toast.error("이미지 업로드에 실패했습니다.");
+        } finally {
+          setIsUploadingImage(false);
+        }
+
         return;
       },
       codeblock: () => {

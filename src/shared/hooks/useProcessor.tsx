@@ -127,7 +127,5 @@ export function useProcessor(doc: string) {
     })();
   }, [doc]);
 
-  console.log(Content);
-
   return Content;
 }

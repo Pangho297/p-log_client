@@ -1,6 +1,7 @@
 export interface GetDirectUploadUrlRequestDto {
+  purpose?: string;
   /** 게시글 Id (PK) */
-  postId: string;
+  postId?: string;
 }
 
 export interface GetDirectUploadUrlResponseDto {
