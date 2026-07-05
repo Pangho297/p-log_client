@@ -1,0 +1,85 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Seoul"
+    open-pull-requests-limit: 5
+    versioning-strategy: "increase-if-necessary"
+    commit-message:
+      prefix: "chore: 의존성 업데이트"
+      include: "scope"
+    groups:
+      nextjs:
+        patterns:
+          - "next"
+          - "eslint-config-next"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "react-responsive"
+      codemirror:
+        patterns:
+          - "@codemirror/*"
+          - "@lezer/*"
+      radix-ui:
+        patterns:
+          - "@radix-ui/*"
+          - "radix-ui"
+      markdown-processing:
+        patterns:
+          - "github-slugger"
+          - "hast-*"
+          - "mdast-*"
+          - "rehype-*"
+          - "remark-*"
+          - "unified"
+          - "unist"
+          - "unist-*"
+          - "@types/hast"
+          - "@types/mdast"
+          - "@types/unist"
+      styling:
+        patterns:
+          - "@tailwindcss/*"
+          - "tailwindcss"
+          - "tailwind-merge"
+          - "tw-animate-css"
+          - "class-variance-authority"
+          - "clsx"
+          - "lucide-react"
+      forms-validation:
+        patterns:
+          - "@hookform/*"
+          - "react-hook-form"
+          - "zod"
+      data-state:
+        patterns:
+          - "@tanstack/*"
+          - "axios"
+          - "zustand"
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "eslint-*"
+      formatting:
+        patterns:
+          - "prettier"
+          - "prettier-*"
+      typescript-tooling:
+        patterns:
+          - "typescript"
+          - "@types/node"
+          - "@svgr/webpack"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
