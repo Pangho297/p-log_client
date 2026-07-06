@@ -1,4 +1,5 @@
 import { EditorView } from "@codemirror/view";
+
 import { ICON } from "@/shared";
 
 import { useToolbar } from "../../model/useToolbar";

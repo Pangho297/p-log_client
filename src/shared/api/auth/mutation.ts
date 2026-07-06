@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { OWNER_USER_ID } from "@/shared/constant/common";
 import { redirectToLogin } from "@/shared/lib/auth";
+import { useOwnerStore } from "@/shared/store/owner";
 import { LoginRequestDto } from "@/shared/types/auth";
 
 import * as AuthAPI from ".";
-import { OWNER_USER_ID } from "@/shared/constant/common";
-import { useOwnerStore } from "@/shared/store/owner";
 
 export function useLogin() {
   const { setIsOwner } = useOwnerStore();

@@ -44,14 +44,23 @@ export function getErrorMessage(
   const messages: string[] = [];
   const messageKeys = Array.isArray(messageKey) ? messageKey : [messageKey];
 
-  const extract = (value: any): void => {
+  const isRecord = (value: unknown): value is Record<string, unknown> => {
+    return typeof value === "object" && value !== null;
+  };
+
+  const extract = (value: unknown): void => {
     if (Array.isArray(value)) {
       value.forEach((item) => extract(item));
-    } else if (typeof value === "object" && value !== null) {
+    } else if (isRecord(value)) {
       // 메세지 키 확인
       for (const key of messageKeys) {
         if (key in value) {
-          messages.push(value[key]);
+          const message = value[key];
+
+          if (typeof message === "string") {
+            messages.push(message);
+          }
+
           if (stopOnFirst) return;
         }
       }

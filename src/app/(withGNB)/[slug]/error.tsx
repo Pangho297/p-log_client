@@ -1,10 +1,11 @@
 "use client";
 
-import { Button, Code, ErrorType, Pre, ROUTE } from "@/shared";
 import Link from "next/link";
 
-export default function PostDetailError({ error, reset }: ErrorType) {
-  let stack = error.stack;
+import { Button, Code, ErrorType, Pre, ROUTE } from "@/shared";
+
+export default function PostDetailError({ error }: ErrorType) {
+  const stack = error.stack;
   const message = error.message;
 
   return (

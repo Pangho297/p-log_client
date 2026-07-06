@@ -1,9 +1,11 @@
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+
 import { QUERY_KEY } from "@/shared/constant/query-key";
 import {
   GetPostListRequestDto,
   GetPostListResponseDto,
 } from "@/shared/types/post";
-import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+
 import { fetchPost, fetchPostList } from "./server";
 
 export const postQueries = {

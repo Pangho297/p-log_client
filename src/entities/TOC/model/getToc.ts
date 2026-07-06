@@ -1,9 +1,10 @@
-import { unified } from "unified";
-import { Heading, HeadingNode } from "./type";
-import remarkParse from "remark-parse";
-import { visit } from "unist-util-visit";
-import { toString } from "mdast-util-to-string"; // HTML h 태그의 요소만 가져오는 유틸리티 함수
 import GithubSlugger from "github-slugger";
+import { toString } from "mdast-util-to-string"; // HTML h 태그의 요소만 가져오는 유틸리티 함수
+import remarkParse from "remark-parse";
+import { unified } from "unified";
+import { visit } from "unist-util-visit";
+
+import { Heading, HeadingNode } from "./type";
 
 export function getToc(markdown: string) {
   const headings: Heading[] = [];

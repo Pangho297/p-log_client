@@ -15,7 +15,7 @@ import {
 import { languages } from "@codemirror/language-data";
 import { EditorState } from "@codemirror/state";
 import { EditorView, keymap, placeholder } from "@codemirror/view";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { type RefObject, useEffect, useRef, useState } from "react";
 
 import { customHighlightStyle, transparentTheme } from "./editorStyle";
 

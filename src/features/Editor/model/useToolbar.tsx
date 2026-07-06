@@ -2,9 +2,10 @@
 
 import { EditorSelection } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
-import { LoginToast, useGetDirectUploadUrl, useOwnerStore } from "@/shared";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { LoginToast, useGetDirectUploadUrl, useOwnerStore } from "@/shared";
 
 interface Props {
   editorView: EditorView | undefined;
@@ -85,9 +86,6 @@ export function useToolbar({ editorView }: Props) {
     const handler: { [key: string]: () => void | Promise<void> } = {
       ...[1, 2, 3, 4]
         .map((number) => () => {
-          // 선택 안하고 사용한 경우 쓰이는 범위 값;
-          const range = editorView.state.selection.main;
-
           const keyword = "#".repeat(number);
           const changes = [];
 

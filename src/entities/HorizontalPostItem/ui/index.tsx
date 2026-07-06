@@ -1,7 +1,8 @@
-import { PostItemDto } from "@/shared";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+
+import { PostItemDto } from "@/shared";
 
 interface Props {
   post: PostItemDto;

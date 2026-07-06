@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/shared";
+
 import { useTOC } from "../model/useTOC";
 
 interface Props {

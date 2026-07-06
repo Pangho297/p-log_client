@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import "./style/prismTheme.css";
 
-import { Providers } from "./providers";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+
 import { Toaster } from "@/shared";
+
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "P.Log",

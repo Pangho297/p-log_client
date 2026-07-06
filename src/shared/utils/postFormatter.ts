@@ -1,10 +1,11 @@
 import { toString } from "mdast-util-to-string";
-import { unified } from "unified";
-import { PostDto, PostItemDto } from "../types/post";
-import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import remarkParse from "remark-parse";
+import { unified } from "unified";
+
 import { DEFAULT_THUMBNAIL, THUMBNAIL_MAP } from "../constant/common";
+import { PostDto, PostItemDto } from "../types/post";
 
 export function postFormatter(postList: PostDto[]): PostItemDto[] {
   const markdownToPlainText = (markdown: string) => {

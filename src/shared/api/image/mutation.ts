@@ -1,5 +1,6 @@
-import { GetDirectUploadUrlRequestDto } from "@/shared/types/image";
 import { useMutation } from "@tanstack/react-query";
+
+import { GetDirectUploadUrlRequestDto } from "@/shared/types/image";
 
 import * as ImageAPI from ".";
 

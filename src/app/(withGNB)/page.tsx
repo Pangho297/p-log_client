@@ -1,10 +1,11 @@
-import { postQueries } from "@/shared";
-import { PostList, RecentPostList } from "@/widgets";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+
+import { postQueries } from "@/shared";
+import { PostList, RecentPostList } from "@/widgets";
 
 export default async function Home() {
   const queryClient = new QueryClient();

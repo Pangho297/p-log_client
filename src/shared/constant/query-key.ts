@@ -20,6 +20,6 @@ export const QUERY_KEY = {
       "getRecentPostList",
       params,
     ],
-    getPost: (slug: string) => [ROOT_KEY, "getPost", slug],
+    getPost: (slug: string) => [ROOT_KEY.post, "getPost", slug],
   },
 };

@@ -1,7 +1,8 @@
-import { fetchPost, postFormatter } from "@/shared";
-import { Post } from "@/widgets";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+import { fetchPost, postFormatter } from "@/shared";
+import { Post } from "@/widgets";
 
 interface Props {
   params: Promise<{ slug: string }>;

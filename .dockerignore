@@ -1,0 +1,14 @@
+.git
+.github
+.next
+.pnpm-store
+.vscode
+node_modules
+coverage
+docs
+*.log
+*.pem
+.env
+.env.*
+tsconfig.tsbuildinfo
+next-env.d.ts

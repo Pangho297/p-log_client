@@ -1,5 +1,5 @@
 // UI
-export { Preview } from "./Preview";
 export { HorizontalPostItem } from "./HorizontalPostItem";
-export { VerticalPostItem } from "./VerticalPostItem";
+export { Preview } from "./Preview";
 export { TOC } from "./TOC";
+export { VerticalPostItem } from "./VerticalPostItem";

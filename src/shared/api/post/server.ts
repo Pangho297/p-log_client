@@ -4,7 +4,9 @@ import {
   PostDto,
 } from "@/shared/types/post";
 
-function createUrl(path: string, params?: Record<string, any>) {
+type QueryParamValue = string | number | boolean | null | undefined;
+
+function createUrl(path: string, params?: Record<string, QueryParamValue>) {
   const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`);
 
   Object.entries(params ?? {}).forEach(([key, value]) => {
@@ -17,7 +19,7 @@ function createUrl(path: string, params?: Record<string, any>) {
 }
 
 export async function fetchPostList(params: GetPostListRequestDto) {
-  const res = await fetch(createUrl("/post", params), {
+  const res = await fetch(createUrl("/post", { ...params }), {
     cache: "no-store",
   });
 

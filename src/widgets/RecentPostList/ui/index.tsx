@@ -1,8 +1,9 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { VerticalPostItem } from "@/entities";
 import { postFormatter, useGetRecentPostList } from "@/shared";
-import { useMemo } from "react";
 
 export function RecentPostList() {
   const { data: postList } = useGetRecentPostList({

@@ -1,9 +1,10 @@
-import { Preview, TOC } from "@/entities";
-import { PostOwnerActions } from "@/features";
-import { Hashtag, Loading, PostDto } from "@/shared";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+
+import { Preview, TOC } from "@/entities";
+import { PostOwnerActions } from "@/features";
+import { Hashtag, Loading, PostDto } from "@/shared";
 
 interface Props {
   post: PostDto;
@@ -33,7 +34,6 @@ export function Post({ post }: Props) {
             <div className="flex items-center justify-between gap-x-4">
               <div className="scrollbar-hide flex-1 overflow-auto">
                 <div className="flex flex-nowrap gap-x-4 gap-y-2">
-                  {/* @ts-ignore */}
                   {post.tags?.map((hashtag, index) => (
                     <Hashtag key={`${hashtag}_${index}`} hashtag={hashtag} />
                   ))}

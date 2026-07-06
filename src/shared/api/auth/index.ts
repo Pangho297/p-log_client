@@ -1,6 +1,6 @@
-import { ResponseSuccessDto } from "@/shared/types/common";
 import { axiosInstance } from "@/shared/lib/axios";
 import { LoginRequestDto } from "@/shared/types/auth";
+import { ResponseSuccessDto } from "@/shared/types/common";
 import { UserDto } from "@/shared/types/user";
 
 /** 로그인 */

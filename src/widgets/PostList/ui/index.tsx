@@ -1,8 +1,9 @@
 "use client";
 
-import { HorizontalPostItem, VerticalPostItem } from "@/entities";
-import { useGetPostList, useResponsive, postFormatter } from "@/shared";
 import { useMemo } from "react";
+
+import { HorizontalPostItem, VerticalPostItem } from "@/entities";
+import { postFormatter, useGetPostList, useResponsive } from "@/shared";
 
 export function PostList() {
   const { isMobile } = useResponsive();

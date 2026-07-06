@@ -1,4 +1,5 @@
 import { Mail } from "lucide-react";
+
 import { ICON } from "@/shared";
 
 export function Footer() {

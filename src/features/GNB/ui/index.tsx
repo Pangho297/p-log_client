@@ -1,7 +1,8 @@
 "use client";
 
-import { Button, ICON, ROUTE } from "@/shared";
 import Link from "next/link";
+
+import { Button, ICON, ROUTE } from "@/shared";
 
 export function GNB() {
   return (

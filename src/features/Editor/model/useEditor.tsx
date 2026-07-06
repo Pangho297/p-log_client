@@ -2,6 +2,7 @@
 
 import { EditorState } from "@codemirror/state";
 import { useCallback } from "react";
+
 import { useCodemirror } from "./useCodemirror";
 
 interface Props {

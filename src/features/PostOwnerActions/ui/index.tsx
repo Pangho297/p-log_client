@@ -1,9 +1,10 @@
 "use client";
 
-import { DeleteDialog } from "@/features/DeleteDialog";
-import { Button, ROUTE, useDeletePost, useOwnerStore } from "@/shared";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+
+import { DeleteDialog } from "@/features/DeleteDialog";
+import { Button, ROUTE, useDeletePost, useOwnerStore } from "@/shared";
 
 interface Props {
   slug: string;

@@ -1,4 +1,18 @@
-# P.Log Client
+<p align="center">
+  <a href="https://pangho.com" target="_blank" rel="noopener noreferrer">
+    <img src="./src/app/pwa-192x192.png" alt="P.Log logo" width="96" height="96" />
+  </a>
+</p>
+
+<h1 align="center">P.Log Client</h1>
+
+<p align="center">
+  개발 기록과 기술 경험을 정리하는 개인 블로그 <strong>P.Log</strong>의 프론트엔드 프로젝트입니다.
+</p>
+
+<p align="center">
+  <a href="https://pangho.com" target="_blank" rel="noopener noreferrer"><strong>https://pangho.com</strong></a>
+</p>
 
 개인 개발 블로그 `P.Log`의 프론트엔드 프로젝트입니다. 게시글 조회, Markdown 기반 작성/수정, 이미지 업로드, 소유자 전용 관리 기능을 제공합니다.
 

@@ -1,11 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { EditorForm } from "./type";
-import { editorSchema } from "./schema";
-import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+
 import {
   getErrorMessage,
   LoginToast,
@@ -15,7 +15,9 @@ import {
   useResponsive,
   useUpdatePost,
 } from "@/shared";
-import { toast } from "sonner";
+
+import { editorSchema } from "./schema";
+import type { EditorForm } from "./type";
 
 export function useEditorForm() {
   const [hashtag, setHashtag] = useState("");
@@ -65,7 +67,7 @@ export function useEditorForm() {
         content: post.content,
       });
     }
-  }, [post, isModify]);
+  }, [post, isModify, reset]);
 
   const handleCompositionChange = (value: boolean) => {
     isComposition.current = value;

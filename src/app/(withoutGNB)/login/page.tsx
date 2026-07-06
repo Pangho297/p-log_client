@@ -1,9 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
+import { ICON, ROUTE } from "@/shared";
 import Office from "@/shared/assets/images/office.jpg";
 import { LoginForm } from "@/widgets/LoginForm";
-import Link from "next/link";
-import { ICON, ROUTE } from "@/shared";
 
 export default function LoginPage() {
   return (

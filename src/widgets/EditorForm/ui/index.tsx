@@ -1,15 +1,16 @@
 "use client";
 
 import { Controller } from "react-hook-form";
-import { useEditorForm } from "../model/useEditorForm";
-import { Button, cn, Hashtag, Input } from "@/shared";
-import { Editor } from "@/features";
+
 import { Preview } from "@/entities";
+import { Editor } from "@/features";
+import { Button, cn, Hashtag, Input } from "@/shared";
+
+import { useEditorForm } from "../model/useEditorForm";
 
 export function EditorForm() {
   const {
     control,
-    errors,
     isSubmitting,
     watch,
     hashtag,

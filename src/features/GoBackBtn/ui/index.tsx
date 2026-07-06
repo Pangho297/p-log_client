@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "@/shared";
 import { useRouter } from "next/navigation";
+
+import { Button } from "@/shared";
 
 export function GoBackBtn() {
   const router = useRouter();

@@ -3,12 +3,12 @@ import axios, {
   AxiosInstance,
   InternalAxiosRequestConfig,
 } from "axios";
-
-import { redirectToLogin } from "@/shared/lib/auth";
 import { toast } from "sonner";
+
 import { getErrorMessage } from "../utils/getErrorMessage";
 
 const AUTH_REFRESH_URL = "/auth/refresh";
+const AUTH_LOGOUT_URL = "/auth/logout";
 const AUTH_EXCLUDED_URLS = ["/auth/login", AUTH_REFRESH_URL, "/auth/logout"];
 
 export const axiosInstance: AxiosInstance = axios.create({
@@ -56,9 +56,16 @@ function refreshAuthToken() {
   return refreshPromise;
 }
 
+async function logoutSilently() {
+  try {
+    await refreshClient.post(AUTH_LOGOUT_URL);
+  } catch {
+    // 인증 정리 요청 실패는 원래 요청의 실패 흐름을 방해하지 않는다.
+  }
+}
+
 function handleUnauthorized() {
   unauthorizedHandler?.();
-  redirectToLogin();
 }
 
 async function errorInterceptor(error: AxiosError) {
@@ -82,7 +89,7 @@ async function errorInterceptor(error: AxiosError) {
     await refreshAuthToken();
     return axiosInstance(originalRequest);
   } catch (refreshError) {
-    toast.error("회원 정보를 조회할 수 없습니다. 다시 로그인 해주세요");
+    await logoutSilently();
     handleUnauthorized();
     return Promise.reject(refreshError);
   }

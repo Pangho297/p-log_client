@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { GoBackBtn } from "@/features";
 import { Button, ROUTE } from "@/shared";
-import Link from "next/link";
 
 export default function notFound() {
   return (

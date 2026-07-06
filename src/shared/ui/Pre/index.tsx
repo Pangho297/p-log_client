@@ -1,7 +1,7 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { Copy } from "lucide-react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
 import { Button } from "../Button";
 

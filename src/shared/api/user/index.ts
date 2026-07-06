@@ -1,8 +1,8 @@
 import { axiosInstance } from "@/shared/lib/axios";
 import {
-  UserDto,
   SignupRequestDto,
   SignupResponseDto,
+  UserDto,
 } from "@/shared/types/user";
 
 /** 회원가입 */
