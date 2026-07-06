@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: 프론트엔드 배포
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
 
 jobs:
   verify:
-    name: Verify
+    name: 빌드 검증
     runs-on: ubuntu-latest
 
     env:
@@ -23,46 +23,46 @@ jobs:
       NEXT_PUBLIC_OWNER_USER_ID: 00000000-0000-4000-8000-000000000000
 
     steps:
-      - name: Checkout
+      - name: 코드 체크아웃
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
+      - name: pnpm 설정
         uses: pnpm/action-setup@v4
         with:
           version: 11.1.1
 
-      - name: Setup Node.js
+      - name: Node.js 설정
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
-      - name: Install dependencies
+      - name: 의존성 설치
         run: pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: 애플리케이션 빌드
         run: pnpm build
 
   deploy:
-    name: Build, Push, Deploy
+    name: Docker Hub 이미지 배포 및 Lightsail 배포
     runs-on: ubuntu-latest
     needs: verify
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
 
     steps:
-      - name: Checkout
+      - name: 코드 체크아웃
         uses: actions/checkout@v4
 
-      - name: Setup Docker Buildx
+      - name: Docker Buildx 설정
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Docker Hub
+      - name: Docker Hub 로그인
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: 이미지 빌드 및 푸시
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -77,14 +77,14 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Configure SSH
+      - name: SSH 키 설정
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.LIGHTSAIL_SSH_KEY }}" > ~/.ssh/lightsail_key
           chmod 600 ~/.ssh/lightsail_key
           ssh-keyscan -H "${{ secrets.LIGHTSAIL_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Deploy to Lightsail
+      - name: 서버에서 프론트엔드 갱신
         run: |
           ssh -i ~/.ssh/lightsail_key "${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }}" << 'EOF'
             set -e

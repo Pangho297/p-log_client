@@ -136,6 +136,46 @@ src
 NEXT_PUBLIC_API_BASE_URL=
 ```
 
+## 배포 전략
+
+프론트엔드와 백엔드는 각각 GitHub Actions에서 빌드 검증 후 Docker 이미지를 생성해 Docker Hub에 배포합니다.
+Lightsail 서버는 Docker Hub의 최신 이미지를 pull한 뒤 `docker-compose`로 필요한 서비스만 갱신합니다.
+Nginx는 외부 요청을 받아 프론트엔드로 전달하고, `/api` 요청은 백엔드로 프록시합니다.
+백엔드 배포 시에는 컨테이너 갱신 후 DB 마이그레이션을 실행해 애플리케이션 코드와 데이터베이스 스키마를 맞춥니다.
+
+```mermaid
+flowchart TD
+  developer[개발] -->|main 브랜치 push 또는<br /> 수동 실행| github[GitHub Actions]
+
+  github --> frontendVerify[프론트엔드 빌드 검증]
+  github --> backendVerify[백엔드 빌드 검증]
+
+  frontendVerify --> frontendImage[프론트엔드 Docker<br /> 이미지 빌드]
+  backendVerify --> backendImage[백엔드 Docker<br /> 이미지 빌드]
+
+  frontendImage -->|p-log-frontend:latest <br />/ commit sha| dockerHub[(Docker Hub)]
+  backendImage -->|p-log-backend:latest <br />/ commit sha| dockerHub
+
+  dockerHub -->|프론트엔드 이미지 pull| lightsail[AWS Lightsail]
+  dockerHub -->|백엔드 이미지 pull| lightsail
+
+  subgraph lightsailCompose[Lightsail docker-compose]
+    nginx[Nginx<br/>Reverse Proxy]
+    frontend[frontend 컨테이너<br/>Next.js]
+    backend[backend 컨테이너<br/>API Server]
+    db[(db 컨테이너<br/>Database)]
+  end
+
+  lightsail -->|프론트엔드 갱신| frontend
+  lightsail -->|백엔드 갱신| backend
+  lightsail -->|DB 마이그레이션| db
+
+  nginx -->|/| frontend
+  nginx -->|/api| backend
+  frontend -->|API 요청| backend
+  backend -->|데이터 조회 및 변경| db
+```
+
 ## 실행 방법
 
 ```bash
