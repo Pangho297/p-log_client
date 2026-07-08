@@ -1,0 +1,1 @@
+export const BOTTOM_STICKY_SCROLL_MARGIN = 80;

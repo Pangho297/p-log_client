@@ -14,14 +14,32 @@ import {
 } from "@codemirror/language";
 import { languages } from "@codemirror/language-data";
 import { EditorState } from "@codemirror/state";
-import { EditorView, keymap, placeholder } from "@codemirror/view";
+import {
+  EditorView,
+  keymap,
+  placeholder,
+  type ViewUpdate,
+} from "@codemirror/view";
 import { type RefObject, useEffect, useRef, useState } from "react";
 
+import { BOTTOM_STICKY_SCROLL_MARGIN } from "../consts";
 import { customHighlightStyle, transparentTheme } from "./editorStyle";
 
 interface Props {
   initialDoc: string;
   onChange?: (state: EditorState) => void;
+}
+
+function hasInsertedLineBreak(update: ViewUpdate) {
+  let hasLineBreak = false;
+
+  update.changes.iterChanges((_, __, ___, ____, inserted) => {
+    if (inserted.toString().includes("\n")) {
+      hasLineBreak = true;
+    }
+  });
+
+  return hasLineBreak;
 }
 
 /** 코드미러6 에디터 생성 Hook
@@ -58,8 +76,25 @@ export function useCodemirror<T extends Element>({
         syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
         syntaxHighlighting(customHighlightStyle),
         EditorView.lineWrapping,
+        EditorView.scrollMargins.of(() => ({
+          bottom: BOTTOM_STICKY_SCROLL_MARGIN,
+        })),
         EditorView.updateListener.of((update) => {
-          if (update.changes && onChange) {
+          if (!update.docChanged) return;
+
+          if (hasInsertedLineBreak(update)) {
+            update.view.dispatch({
+              effects: EditorView.scrollIntoView(
+                update.state.selection.main.head,
+                {
+                  y: "end",
+                  yMargin: BOTTOM_STICKY_SCROLL_MARGIN,
+                }
+              ),
+            });
+          }
+
+          if (onChange) {
             onChange(update.state);
           }
         }),

@@ -26,7 +26,7 @@ export function Editor({ initialDoc, onChange, isHashtagInputFocused }: Props) {
         className="w-full flex-1 cursor-text px-5"
         onClick={() => editorView?.focus()}
       >
-        <div ref={editorRef} className="h-full pb-16" />
+        <div ref={editorRef} className="h-full pb-20" />
       </div>
     </article>
   );
