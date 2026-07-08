@@ -6,7 +6,6 @@ import { createElement, Fragment, useEffect, useState } from "react";
 import * as prod from "react/jsx-runtime";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
-import rehypeRaw from "rehype-raw";
 import rehypeReact from "rehype-react";
 import remarkBreak from "remark-breaks";
 import remarkGfm from "remark-gfm";
@@ -113,9 +112,7 @@ export function useProcessor(doc: string) {
         .use(remarkParse)
         .use(remarkGfm)
         .use(remarkMath)
-        .use(remarkRehype, { allowDangerousHtml: true })
-        // TODO: HTML 코드 입력 방지 추가해야함
-        .use(rehypeRaw)
+        .use(remarkRehype)
         .use(rehypeKatex)
         .use(rehypeHighlight)
         .use(addHeadingIds)
