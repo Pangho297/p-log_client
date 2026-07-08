@@ -90,6 +90,6 @@ jobs:
             set -e
             cd "${{ secrets.LIGHTSAIL_DEPLOY_PATH }}"
             docker-compose pull frontend
-            docker-compose up -d frontend
+            docker-compose up -d --no-deps --force-recreate frontend
             docker image prune -f
           EOF
