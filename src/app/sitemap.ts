@@ -6,6 +6,8 @@ import type { PostDto } from "@/shared/types/post";
 
 const SITEMAP_PAGE_SIZE = 100;
 
+export const dynamic = "force-dynamic";
+
 async function fetchAllPosts() {
   const posts: PostDto[] = [];
   let cursor: string | undefined;

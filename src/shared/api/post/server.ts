@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/shared/constant/site";
 import {
   GetPostListRequestDto,
   GetPostListResponseDto,
@@ -7,7 +8,8 @@ import {
 type QueryParamValue = string | number | boolean | null | undefined;
 
 function createUrl(path: string, params?: Record<string, QueryParamValue>) {
-  const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`);
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api";
+  const url = new URL(`${apiBaseUrl}${path}`, SITE_URL);
 
   Object.entries(params ?? {}).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
