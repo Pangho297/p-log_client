@@ -11,6 +11,11 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   title: "P.Log",
   description: "Pangho's Development Blog",
+  verification: {
+    other: {
+      "naver-site-verification": "e34c5fbe850c0a1adcb0564565fc99f3e91dcf08",
+    },
+  },
 };
 
 const pertendard = localFont({
