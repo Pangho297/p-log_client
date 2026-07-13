@@ -6,7 +6,9 @@ import { createElement, Fragment, useEffect, useState } from "react";
 import * as prod from "react/jsx-runtime";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import rehypeReact from "rehype-react";
+import rehypeSanitize from "rehype-sanitize";
 import remarkBreak from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -112,7 +114,12 @@ export function useProcessor(doc: string) {
         .use(remarkParse)
         .use(remarkGfm)
         .use(remarkMath)
-        .use(remarkRehype)
+        // 원본 HTML을 HAST로 변환한 뒤, 허용 목록 기반으로 정화한다.
+        // rehype-sanitize의 기본 스키마는 링크, 이미지, 제목 등 문서용 태그와
+        // 안전한 URL 프로토콜만 허용하고 script, 이벤트 속성은 제거한다.
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeRaw)
+        .use(rehypeSanitize)
         .use(rehypeKatex)
         .use(rehypeHighlight)
         .use(addHeadingIds)

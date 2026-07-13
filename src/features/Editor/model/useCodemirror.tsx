@@ -55,6 +55,7 @@ export function useCodemirror<T extends Element>({
   onChange,
 }: Props): [RefObject<T | null>, EditorView?] {
   const editorRef = useRef<T | null>(null);
+  const editorDocRef = useRef(initialDoc);
   const [editorView, setEditorView] = useState<EditorView>();
 
   useEffect(() => {
@@ -69,11 +70,16 @@ export function useCodemirror<T extends Element>({
         indentOnInput(),
         markdown({
           base: markdownLanguage,
-          codeLanguages: languages,
+          // HTML 예시 블록은 HTML 파서에 맡기지 않고 코드 텍스트로 유지한다.
+          // 포커스 해제 시 재파싱되어 태그가 숨겨지는 것을 방지한다.
+          codeLanguages: languages.filter(({ name }) => name !== "HTML"),
           addKeymap: true,
         }),
         transparentTheme,
-        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+        // 기본 마크다운 토큰 스타일과 커스텀 크기·색상 스타일을 함께 적용한다.
+        // fallback으로 등록하면 커스텀 스타일이 존재하는 경우 기본 스타일이
+        // 비활성화되어 일부 마크다운 토큰에 클래스가 생성되지 않는다.
+        syntaxHighlighting(defaultHighlightStyle),
         syntaxHighlighting(customHighlightStyle),
         EditorView.lineWrapping,
         EditorView.scrollMargins.of(() => ({
@@ -93,6 +99,8 @@ export function useCodemirror<T extends Element>({
               ),
             });
           }
+
+          editorDocRef.current = update.state.doc.toString();
 
           if (onChange) {
             onChange(update.state);
@@ -119,8 +127,15 @@ export function useCodemirror<T extends Element>({
   useEffect(() => {
     /** 수정 등으로 접근 시 초기 문서 주입 */
     if (!editorView) return;
+
+    // 사용자가 방금 입력한 값은 폼 상태가 다시 전달할 때까지 잠시 이전
+    // initialDoc을 유지할 수 있다. 그 값을 다시 주입하면 입력 중인 코드가
+    // 되돌아갈 수 있으므로, 에디터에서 발생한 변경의 echo는 무시한다.
+    if (initialDoc === editorDocRef.current) return;
+
     const currentDoc = editorView.state.doc.toString();
     if (currentDoc !== initialDoc) {
+      editorDocRef.current = initialDoc;
       editorView.dispatch({
         changes: { from: 0, to: currentDoc.length, insert: initialDoc },
       });
